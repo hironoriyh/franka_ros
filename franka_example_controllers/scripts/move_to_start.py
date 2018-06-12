@@ -14,6 +14,5 @@ if __name__ == '__main__':
     # rospy.logwarn(commander.goal_id)
     commander.go()
 
-    # rospy.Rate(2).sleep()
     # commander.set_named_target('home')
     # commander.go()
