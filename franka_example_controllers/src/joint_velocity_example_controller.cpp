@@ -83,17 +83,18 @@ void JointVelocityExampleController::update(const ros::Time& /* time */,
                                             const ros::Duration& period) {
   elapsed_time_ += period;
 
-  ros::Duration time_max(8.0);
-  double omega_max = 0.1;
+  ros::Duration time_max(4.0);
+  double omega_max = 0.4;
   double cycle = std::floor(
       std::pow(-1.0, (elapsed_time_.toSec() - std::fmod(elapsed_time_.toSec(), time_max.toSec())) /
                          time_max.toSec()));
   double omega = cycle * omega_max / 2.0 *
                  (1.0 - std::cos(2.0 * M_PI / time_max.toSec() * elapsed_time_.toSec()));
 
-  for (auto joint_handle : velocity_joint_handles_) {
-    joint_handle.setCommand(omega);
-  }
+  velocity_joint_handles_[2].setCommand(omega);
+  // for (auto joint_handle : velocity_joint_handles_) {
+  //   joint_handle.setCommand(omega);
+  // }
 }
 
 void JointVelocityExampleController::stopping(const ros::Time& /*time*/) {
